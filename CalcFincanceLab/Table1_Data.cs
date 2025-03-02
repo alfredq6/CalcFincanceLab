@@ -10,9 +10,28 @@ namespace CalcFincanceLab
     {
         private readonly BaseData m_Data;
 
+        private List<DataValues> m_ProductA_SalesVolume_Values;
+        private List<DataValues> m_ProductB_SalesVolume_Values;
+        private List<DataValues> m_ProductA_Price_Values;
+        private List<DataValues> m_ProductB_Price_Values;
+        private List<DataValues> m_ProductA_SalesVolumePrice_Values;
+        private List<DataValues> m_ProductB_SalesVolumePrice_Values;
+        private List<DataValues> m_Result_SalesVolumePrice_Values;
+
         public Table1_Data(BaseData data)
         {
             m_Data = data;
+        }
+
+        public void ClearCachedData()
+        {
+            m_ProductA_SalesVolume_Values = null;
+            m_ProductA_SalesVolume_Values = null;
+            m_ProductA_Price_Values = null;
+            m_ProductB_Price_Values = null;
+            m_ProductA_SalesVolumePrice_Values = null;
+            m_ProductB_SalesVolumePrice_Values = null;
+            m_Result_SalesVolumePrice_Values = null;
         }
 
         public List<object[]> GetRows()
@@ -165,6 +184,9 @@ namespace CalcFincanceLab
         {
             get
             {
+                if (m_ProductA_SalesVolume_Values != null)
+                    return m_ProductA_SalesVolume_Values;
+
                 var plannedValue = m_Data.ProductA_SalesVolume / 4;
                 var actualValue = plannedValue;
                 var quaters = new List<DataValues> {
@@ -174,7 +196,8 @@ namespace CalcFincanceLab
                     new DataValues(plannedValue, actualValue),
                 };
                 var year = new DataValues(quaters.Sum(x => x.PlannedValue), quaters.Sum(x => x.ActualValue));
-                return new List<DataValues>(quaters) { year };
+                m_ProductA_SalesVolume_Values = new List<DataValues>(quaters) { year };
+                return m_ProductA_SalesVolume_Values;
             }
         }
 
@@ -182,6 +205,9 @@ namespace CalcFincanceLab
         {
             get
             {
+                if (m_ProductB_SalesVolume_Values != null)
+                    return m_ProductB_SalesVolume_Values;
+
                 var plannedValue = m_Data.ProductB_SalesVolume / 4;
                 var actualValue = plannedValue;
                 var quaters = new List<DataValues> {
@@ -191,7 +217,8 @@ namespace CalcFincanceLab
                     new DataValues(plannedValue, actualValue),
                 };
                 var year = new DataValues(quaters.Sum(x => x.PlannedValue), quaters.Sum(x => x.ActualValue));
-                return new List<DataValues>(quaters) { year };
+                m_ProductB_SalesVolume_Values = new List<DataValues>(quaters) { year };
+                return m_ProductB_SalesVolume_Values;
             }
         }
 
@@ -199,6 +226,9 @@ namespace CalcFincanceLab
         {
             get
             {
+                if (m_ProductA_Price_Values != null)
+                    return m_ProductA_Price_Values;
+
                 var plannedValue = m_Data.ProductA_SellingPrice;
                 var actualValue = plannedValue;
                 var quaters = new List<DataValues> {
@@ -208,7 +238,8 @@ namespace CalcFincanceLab
                     new DataValues(plannedValue, actualValue),
                 };
                 var year = new DataValues(quaters.Sum(x => x.PlannedValue), quaters.Sum(x => x.ActualValue));
-                return new List<DataValues>(quaters) { year };
+                m_ProductA_Price_Values = new List<DataValues>(quaters) { year };
+                return m_ProductA_Price_Values;
             }
         }
 
@@ -216,6 +247,9 @@ namespace CalcFincanceLab
         {
             get
             {
+                if (m_ProductB_Price_Values != null)
+                    return m_ProductB_Price_Values;
+
                 var plannedValue = m_Data.ProductB_SellingPrice;
                 var actualValue = plannedValue;
                 var quaters = new List<DataValues> {
@@ -225,7 +259,8 @@ namespace CalcFincanceLab
                     new DataValues(plannedValue, actualValue),
                 };
                 var year = new DataValues(quaters.Sum(x => x.PlannedValue), quaters.Sum(x => x.ActualValue));
-                return new List<DataValues>(quaters) { year };
+                m_ProductB_Price_Values = new List<DataValues>(quaters) { year };
+                return m_ProductB_Price_Values;
             }
         }
 
@@ -233,6 +268,9 @@ namespace CalcFincanceLab
         {
             get
             {
+                if (m_ProductA_SalesVolumePrice_Values != null)
+                    return m_ProductA_SalesVolumePrice_Values;
+
                 var salesVolumeValues = ProductA_SalesVolume_Values;
                 var priceValues = ProductA_Price_Values;
                 var quaters = new List<DataValues> {
@@ -242,7 +280,8 @@ namespace CalcFincanceLab
                     new DataValues(salesVolumeValues[3].PlannedValue * priceValues[3].PlannedValue, salesVolumeValues[3].ActualValue * priceValues[3].ActualValue),
                 };
                 var year = new DataValues(quaters.Sum(x => x.PlannedValue), quaters.Sum(x => x.ActualValue));
-                return new List<DataValues>(quaters) { year };
+                m_ProductA_SalesVolumePrice_Values = new List<DataValues>(quaters) { year };
+                return m_ProductA_SalesVolumePrice_Values;
             }
         }
 
@@ -250,6 +289,9 @@ namespace CalcFincanceLab
         {
             get
             {
+                if (m_ProductB_SalesVolumePrice_Values != null)
+                    return m_ProductB_SalesVolumePrice_Values;
+
                 var salesVolumeValues = ProductB_SalesVolume_Values;
                 var priceValues = ProductB_Price_Values;
                 var quaters = new List<DataValues> {
@@ -259,7 +301,8 @@ namespace CalcFincanceLab
                     new DataValues(salesVolumeValues[3].PlannedValue * priceValues[3].PlannedValue, salesVolumeValues[3].ActualValue * priceValues[3].ActualValue),
                 };
                 var year = new DataValues(quaters.Sum(x => x.PlannedValue), quaters.Sum(x => x.ActualValue));
-                return new List<DataValues>(quaters) { year };
+                m_ProductB_SalesVolumePrice_Values = new List<DataValues>(quaters) { year };
+                return m_ProductB_SalesVolumePrice_Values;
             }
         }
 
@@ -267,6 +310,9 @@ namespace CalcFincanceLab
         {
             get
             {
+                if (m_Result_SalesVolumePrice_Values != null)
+                    return m_Result_SalesVolumePrice_Values;
+
                 var productASales = ProductA_SalesVolumePrice_Values;
                 var productBSales = ProductB_SalesVolumePrice_Values;
                 var quaters = new List<DataValues> {
@@ -276,7 +322,8 @@ namespace CalcFincanceLab
                     new DataValues(productASales[3].PlannedValue + productBSales[3].PlannedValue, productASales[3].ActualValue + productBSales[3].ActualValue),
                 };
                 var year = new DataValues(quaters.Sum(x => x.PlannedValue), quaters.Sum(x => x.ActualValue));
-                return new List<DataValues>(quaters) { year };
+                m_Result_SalesVolumePrice_Values = new List<DataValues>(quaters) { year };
+                return m_Result_SalesVolumePrice_Values;
             }
         }
 

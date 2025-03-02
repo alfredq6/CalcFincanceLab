@@ -10,9 +10,22 @@ namespace CalcFincanceLab
     {
         private readonly BaseData m_Data;
 
+        private List<DataValues> m_Advertising_Values;
+        private List<DataValues> m_PackagingCosts_Values;
+        private List<DataValues> m_TravelExpenses_Values;
+        private List<DataValues> m_Result_Values;
+
         public Table11_Data(BaseData data)
         {
             m_Data = data;
+        }
+
+        public void ClearCachedData()
+        {
+            m_Advertising_Values = null;
+            m_PackagingCosts_Values = null;
+            m_TravelExpenses_Values = null;
+            m_Result_Values = null;
         }
 
         public List<object[]> GetRows()
@@ -101,11 +114,13 @@ namespace CalcFincanceLab
             };
         }
 
-
         public List<DataValues> Advertising_Values
         {
             get
             {
+                if (m_Advertising_Values != null)
+                    return m_Advertising_Values;
+
                 var plannedValue = m_Data.Advertising / 4;
                 var actualValue = plannedValue;
                 var quaters = new List<DataValues> {
@@ -115,7 +130,8 @@ namespace CalcFincanceLab
                     new DataValues(plannedValue, actualValue),
                 };
                 var year = new DataValues(quaters.Sum(x => x.PlannedValue), quaters.Sum(x => x.ActualValue));
-                return new List<DataValues>(quaters) { year };
+                m_Advertising_Values = new List<DataValues>(quaters) { year };
+                return m_Advertising_Values;
             }
         }
 
@@ -123,6 +139,9 @@ namespace CalcFincanceLab
         {
             get
             {
+                if (m_PackagingCosts_Values != null)
+                    return m_PackagingCosts_Values;
+
                 var plannedValue = m_Data.PackagingCosts / 4;
                 var actualValue = plannedValue;
                 var quaters = new List<DataValues> {
@@ -132,7 +151,8 @@ namespace CalcFincanceLab
                     new DataValues(plannedValue, actualValue),
                 };
                 var year = new DataValues(quaters.Sum(x => x.PlannedValue), quaters.Sum(x => x.ActualValue));
-                return new List<DataValues>(quaters) { year };
+                m_PackagingCosts_Values = new List<DataValues>(quaters) { year };
+                return m_PackagingCosts_Values;
             }
         }
 
@@ -140,6 +160,9 @@ namespace CalcFincanceLab
         {
             get
             {
+                if (m_TravelExpenses_Values != null)
+                    return m_TravelExpenses_Values;
+
                 var plannedValue = m_Data.TravelExpenses / 4;
                 var actualValue = plannedValue;
                 var quaters = new List<DataValues> {
@@ -149,7 +172,8 @@ namespace CalcFincanceLab
                     new DataValues(plannedValue, actualValue),
                 };
                 var year = new DataValues(quaters.Sum(x => x.PlannedValue), quaters.Sum(x => x.ActualValue));
-                return new List<DataValues>(quaters) { year };
+                m_TravelExpenses_Values = new List<DataValues>(quaters) { year };
+                return m_TravelExpenses_Values;
             }
         }
 
@@ -157,6 +181,9 @@ namespace CalcFincanceLab
         {
             get
             {
+                if (m_Result_Values != null)
+                    return m_Result_Values;
+
                 var quaters = new List<DataValues> {
                     new DataValues(
                         Advertising_Values[0].PlannedValue + PackagingCosts_Values[0].PlannedValue + TravelExpenses_Values[0].PlannedValue,
@@ -172,7 +199,8 @@ namespace CalcFincanceLab
                         Advertising_Values[3].ActualValue + PackagingCosts_Values[3].ActualValue + TravelExpenses_Values[3].ActualValue),
                 };
                 var year = new DataValues(quaters.Sum(x => x.PlannedValue), quaters.Sum(x => x.ActualValue));
-                return new List<DataValues>(quaters) { year };
+                m_Result_Values = new List<DataValues>(quaters) { year };
+                return m_Result_Values;
             }
         }
     }

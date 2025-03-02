@@ -9,5 +9,6 @@ namespace CalcFincanceLab
     public interface ITable_Data
     {
         List<object[]> GetRows();
+        void ClearCachedData();
     }
 }

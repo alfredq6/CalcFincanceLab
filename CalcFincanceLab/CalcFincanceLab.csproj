@@ -60,10 +60,17 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DataValues.cs" />
+    <Compile Include="Table10_Data.cs" />
     <Compile Include="Table11_Data.cs" />
     <Compile Include="Table1_Data.cs" />
     <Compile Include="Table2_Data.cs" />
     <Compile Include="Table3_Data.cs" />
+    <Compile Include="Table4_Data.cs" />
+    <Compile Include="Table5_Data.cs" />
+    <Compile Include="Table6_Data.cs" />
+    <Compile Include="Table7_Data.cs" />
+    <Compile Include="Table8_Data.cs" />
+    <Compile Include="Table9_Data.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

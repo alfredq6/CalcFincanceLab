@@ -10,9 +10,40 @@ namespace CalcFincanceLab
     {
         private readonly BaseData m_Data;
 
+        private List<DataValues> m_ProductA_SalesVolume_Values;
+        private List<DataValues> m_ProductB_SalesVolume_Values;
+        private List<DataValues> m_ProductA_BalanceAtTheEndOfTheYear_Values;
+        private List<DataValues> m_ProductB_BalanceAtTheEndOfTheYear_Values;
+        private List<DataValues> m_ProductA_BalanceAtTheBeginningOfTheYear_Values;
+        private List<DataValues> m_ProductB_BalanceAtTheBeginningOfTheYear_Values;
+        private List<DataValues> m_ProductA_Production_Values;
+        private List<DataValues> m_ProductB_Production_Values;
+        private List<DataValues> m_ProductA_PlannedCost_Values;
+        private List<DataValues> m_ProductB_PlannedCost_Values;
+        private List<DataValues> m_ProductA_ProductionPrice_Values;
+        private List<DataValues> m_ProductB_ProductionPrice_Values;
+        private List<DataValues> m_Result_Values;
+
         public Table3_Data(BaseData data)
         {
             m_Data = data;
+        }
+
+        public void ClearCachedData()
+        {
+            m_ProductA_SalesVolume_Values = null;
+            m_ProductB_SalesVolume_Values = null;
+            m_ProductA_BalanceAtTheEndOfTheYear_Values = null;
+            m_ProductB_BalanceAtTheEndOfTheYear_Values = null;
+            m_ProductA_BalanceAtTheBeginningOfTheYear_Values = null;
+            m_ProductB_BalanceAtTheBeginningOfTheYear_Values = null;
+            m_ProductA_Production_Values = null;
+            m_ProductB_Production_Values = null;
+            m_ProductA_PlannedCost_Values = null;
+            m_ProductB_PlannedCost_Values = null;
+            m_ProductA_ProductionPrice_Values = null;
+            m_ProductB_ProductionPrice_Values = null;
+            m_Result_Values = null;
         }
 
         public List<object[]> GetRows()
@@ -281,11 +312,13 @@ namespace CalcFincanceLab
             };
         }
 
-
         public List<DataValues> ProductA_SalesVolume_Values
         {
             get
             {
+                if (m_ProductA_SalesVolume_Values != null)
+                    return m_ProductA_SalesVolume_Values;
+
                 var plannedValue = m_Data.ProductA_SalesVolume / 4;
                 var actualValue = plannedValue;
                 var quaters = new List<DataValues> {
@@ -295,7 +328,8 @@ namespace CalcFincanceLab
                     new DataValues(plannedValue, actualValue),
                 };
                 var year = new DataValues(quaters.Sum(x => x.PlannedValue), quaters.Sum(x => x.ActualValue));
-                return new List<DataValues>(quaters) { year };
+                m_ProductA_SalesVolume_Values = new List<DataValues>(quaters) { year };
+                return m_ProductA_SalesVolume_Values;
             }
         }
 
@@ -303,6 +337,9 @@ namespace CalcFincanceLab
         {
             get
             {
+                if (m_ProductB_SalesVolume_Values != null)
+                    return m_ProductB_SalesVolume_Values;
+
                 var plannedValue = m_Data.ProductB_SalesVolume / 4;
                 var actualValue = plannedValue;
                 var quaters = new List<DataValues> {
@@ -312,7 +349,8 @@ namespace CalcFincanceLab
                     new DataValues(plannedValue, actualValue),
                 };
                 var year = new DataValues(quaters.Sum(x => x.PlannedValue), quaters.Sum(x => x.ActualValue));
-                return new List<DataValues>(quaters) { year };
+                m_ProductB_SalesVolume_Values = new List<DataValues>(quaters) { year };
+                return m_ProductB_SalesVolume_Values;
             }
         }
 
@@ -320,6 +358,9 @@ namespace CalcFincanceLab
         {
             get
             {
+                if (m_ProductA_BalanceAtTheEndOfTheYear_Values != null)
+                    return m_ProductA_BalanceAtTheEndOfTheYear_Values;
+
                 var percents = m_Data.ProductA_InventoryPolicy / 100;
                 var quaters = new List<DataValues> {
                     new DataValues(ProductA_SalesVolume_Values[0].PlannedValue * percents, ProductA_SalesVolume_Values[0].ActualValue * percents),
@@ -328,7 +369,8 @@ namespace CalcFincanceLab
                     new DataValues(ProductA_SalesVolume_Values[3].PlannedValue * percents, ProductA_SalesVolume_Values[3].ActualValue * percents),
                 };
                 var year = new DataValues(quaters[3].PlannedValue, quaters[3].ActualValue);
-                return new List<DataValues>(quaters) { year };
+                m_ProductA_BalanceAtTheEndOfTheYear_Values = new List<DataValues>(quaters) { year };
+                return m_ProductA_BalanceAtTheEndOfTheYear_Values;
             }
         }
 
@@ -336,6 +378,9 @@ namespace CalcFincanceLab
         {
             get
             {
+                if (m_ProductB_BalanceAtTheEndOfTheYear_Values != null)
+                    return m_ProductB_BalanceAtTheEndOfTheYear_Values;
+
                 var percents = m_Data.ProductB_InventoryPolicy / 100;
                 var quaters = new List<DataValues> {
                     new DataValues(ProductB_SalesVolume_Values[0].PlannedValue * percents, ProductB_SalesVolume_Values[0].ActualValue * percents),
@@ -344,7 +389,8 @@ namespace CalcFincanceLab
                     new DataValues(ProductB_SalesVolume_Values[3].PlannedValue * percents, ProductB_SalesVolume_Values[3].ActualValue * percents),
                 };
                 var year = new DataValues(quaters[3].PlannedValue, quaters[3].ActualValue);
-                return new List<DataValues>(quaters) { year };
+                m_ProductB_BalanceAtTheEndOfTheYear_Values = new List<DataValues>(quaters) { year };
+                return m_ProductB_BalanceAtTheEndOfTheYear_Values;
             }
         }
 
@@ -352,6 +398,9 @@ namespace CalcFincanceLab
         {
             get
             {
+                if (m_ProductA_BalanceAtTheBeginningOfTheYear_Values != null)
+                    return m_ProductA_BalanceAtTheBeginningOfTheYear_Values;
+
                 var quaters = new List<DataValues> {
                     new DataValues(m_Data.ProductA_BalanceAtTheBeginningOfTheYear, m_Data.ProductA_BalanceAtTheBeginningOfTheYear),
                     new DataValues(ProductA_BalanceAtTheEndOfTheYear_Values[1].PlannedValue, ProductA_BalanceAtTheEndOfTheYear_Values[1].ActualValue),
@@ -359,7 +408,8 @@ namespace CalcFincanceLab
                     new DataValues(ProductA_BalanceAtTheEndOfTheYear_Values[3].PlannedValue, ProductA_BalanceAtTheEndOfTheYear_Values[3].ActualValue),
                 };
                 var year = new DataValues(m_Data.ProductA_BalanceAtTheBeginningOfTheYear, m_Data.ProductA_BalanceAtTheBeginningOfTheYear);
-                return new List<DataValues>(quaters) { year };
+                m_ProductA_BalanceAtTheBeginningOfTheYear_Values = new List<DataValues>(quaters) { year };
+                return m_ProductA_BalanceAtTheBeginningOfTheYear_Values;
             }
         }
 
@@ -367,6 +417,9 @@ namespace CalcFincanceLab
         {
             get
             {
+                if (m_ProductB_BalanceAtTheBeginningOfTheYear_Values != null)
+                    return m_ProductB_BalanceAtTheBeginningOfTheYear_Values;
+
                 var quaters = new List<DataValues> {
                     new DataValues(m_Data.ProductB_BalanceAtTheBeginningOfTheYear, m_Data.ProductB_BalanceAtTheBeginningOfTheYear),
                     new DataValues(ProductB_BalanceAtTheEndOfTheYear_Values[1].PlannedValue, ProductB_BalanceAtTheEndOfTheYear_Values[1].ActualValue),
@@ -374,7 +427,8 @@ namespace CalcFincanceLab
                     new DataValues(ProductB_BalanceAtTheEndOfTheYear_Values[3].PlannedValue, ProductB_BalanceAtTheEndOfTheYear_Values[3].ActualValue),
                 };
                 var year = new DataValues(m_Data.ProductB_BalanceAtTheBeginningOfTheYear, m_Data.ProductB_BalanceAtTheBeginningOfTheYear);
-                return new List<DataValues>(quaters) { year };
+                m_ProductB_BalanceAtTheBeginningOfTheYear_Values = new List<DataValues>(quaters) { year };
+                return m_ProductB_BalanceAtTheBeginningOfTheYear_Values;
             }
         }
 
@@ -382,6 +436,9 @@ namespace CalcFincanceLab
         {
             get
             {
+                if (m_ProductA_Production_Values != null)
+                    return m_ProductA_Production_Values;
+
                 var quaters = new List<DataValues> {
                     new DataValues(
                         ProductA_SalesVolume_Values[0].PlannedValue - ProductA_BalanceAtTheBeginningOfTheYear_Values[0].PlannedValue + ProductA_BalanceAtTheEndOfTheYear_Values[0].PlannedValue,
@@ -397,7 +454,8 @@ namespace CalcFincanceLab
                         ProductA_SalesVolume_Values[3].ActualValue - ProductA_BalanceAtTheBeginningOfTheYear_Values[3].ActualValue + ProductA_BalanceAtTheEndOfTheYear_Values[3].ActualValue),
                 };
                 var year = new DataValues(quaters.Sum(x => x.PlannedValue), quaters.Sum(x => x.ActualValue));
-                return new List<DataValues>(quaters) { year };
+                m_ProductA_Production_Values = new List<DataValues>(quaters) { year };
+                return m_ProductA_Production_Values;
             }
         }
 
@@ -405,6 +463,9 @@ namespace CalcFincanceLab
         {
             get
             {
+                if (m_ProductB_Production_Values != null)
+                    return m_ProductB_Production_Values;
+
                 var quaters = new List<DataValues> {
                     new DataValues(
                         ProductB_SalesVolume_Values[0].PlannedValue - ProductB_BalanceAtTheBeginningOfTheYear_Values[0].PlannedValue + ProductB_BalanceAtTheEndOfTheYear_Values[0].PlannedValue,
@@ -420,7 +481,8 @@ namespace CalcFincanceLab
                         ProductB_SalesVolume_Values[3].ActualValue - ProductB_BalanceAtTheBeginningOfTheYear_Values[3].ActualValue + ProductB_BalanceAtTheEndOfTheYear_Values[3].ActualValue),
                 };
                 var year = new DataValues(quaters.Sum(x => x.PlannedValue), quaters.Sum(x => x.ActualValue));
-                return new List<DataValues>(quaters) { year };
+                m_ProductB_Production_Values = new List<DataValues>(quaters) { year };
+                return m_ProductB_Production_Values;
             }
         }
 
@@ -428,6 +490,9 @@ namespace CalcFincanceLab
         {
             get
             {
+                if (m_ProductA_PlannedCost_Values != null)
+                    return m_ProductA_PlannedCost_Values;
+
                 var plannedValue = m_Data.ProductA_PlannedCost > 0
                     ? m_Data.ProductA_PlannedCost
                     : ((m_Data.ProductA_Material1ConsumptionRate * m_Data.PurchasePrice) + (m_Data.ProductA_Worker1ConsumptionRate * m_Data.HourlyWageRate));
@@ -439,7 +504,8 @@ namespace CalcFincanceLab
                     new DataValues(plannedValue, actualValue),
                 };
                 var year = new DataValues(plannedValue, actualValue);
-                return new List<DataValues>(quaters) { year };
+                m_ProductA_PlannedCost_Values = new List<DataValues>(quaters) { year };
+                return m_ProductA_PlannedCost_Values;
             }
         }
 
@@ -447,6 +513,9 @@ namespace CalcFincanceLab
         {
             get
             {
+                if (m_ProductB_PlannedCost_Values != null)
+                    return m_ProductB_PlannedCost_Values;
+
                 var plannedValue = m_Data.ProductB_PlannedCost > 0
                     ? m_Data.ProductB_PlannedCost
                     : ((m_Data.ProductB_Material1ConsumptionRate * m_Data.PurchasePrice) + (m_Data.ProductB_Worker1ConsumptionRate * m_Data.HourlyWageRate));
@@ -458,7 +527,8 @@ namespace CalcFincanceLab
                     new DataValues(plannedValue, actualValue),
                 };
                 var year = new DataValues(plannedValue, actualValue);
-                return new List<DataValues>(quaters) { year };
+                m_ProductB_PlannedCost_Values = new List<DataValues>(quaters) { year };
+                return m_ProductB_PlannedCost_Values;
             }
         }
 
@@ -466,6 +536,9 @@ namespace CalcFincanceLab
         {
             get
             {
+                if (m_ProductA_ProductionPrice_Values != null)
+                    return m_ProductA_ProductionPrice_Values;
+
                 var quaters = new List<DataValues> {
                     new DataValues(
                         ProductA_Production_Values[0].PlannedValue * ProductA_PlannedCost_Values[0].PlannedValue,
@@ -483,7 +556,8 @@ namespace CalcFincanceLab
                 var year = new DataValues(
                     ProductA_Production_Values[4].PlannedValue * ProductA_PlannedCost_Values[4].PlannedValue,
                     ProductA_Production_Values[4].ActualValue * ProductA_PlannedCost_Values[4].ActualValue);
-                return new List<DataValues>(quaters) { year };
+                m_ProductA_ProductionPrice_Values = new List<DataValues>(quaters) { year };
+                return m_ProductA_ProductionPrice_Values;
             }
         }
 
@@ -491,6 +565,9 @@ namespace CalcFincanceLab
         {
             get
             {
+                if (m_ProductB_ProductionPrice_Values != null)
+                    return m_ProductB_ProductionPrice_Values;
+
                 var quaters = new List<DataValues> {
                     new DataValues(
                         ProductB_Production_Values[0].PlannedValue * ProductB_PlannedCost_Values[0].PlannedValue,
@@ -508,7 +585,8 @@ namespace CalcFincanceLab
                 var year = new DataValues(
                     ProductB_Production_Values[4].PlannedValue * ProductB_PlannedCost_Values[4].PlannedValue,
                     ProductB_Production_Values[4].ActualValue * ProductB_PlannedCost_Values[4].ActualValue);
-                return new List<DataValues>(quaters) { year };
+                m_ProductB_ProductionPrice_Values = new List<DataValues>(quaters) { year };
+                return m_ProductB_ProductionPrice_Values;
             }
         }
 
@@ -516,6 +594,9 @@ namespace CalcFincanceLab
         {
             get
             {
+                if (m_Result_Values != null)
+                    return m_Result_Values;
+
                 var quaters = new List<DataValues> {
                     new DataValues(
                         ProductA_ProductionPrice_Values[0].PlannedValue + ProductB_ProductionPrice_Values[0].PlannedValue,
@@ -533,7 +614,8 @@ namespace CalcFincanceLab
                 var year = new DataValues(
                     ProductA_ProductionPrice_Values[4].PlannedValue + ProductB_ProductionPrice_Values[4].PlannedValue,
                     ProductA_ProductionPrice_Values[4].ActualValue + ProductB_ProductionPrice_Values[4].ActualValue);
-                return new List<DataValues>(quaters) { year };
+                m_Result_Values = new List<DataValues>(quaters) { year };
+                return m_Result_Values;
             }
         }
     }

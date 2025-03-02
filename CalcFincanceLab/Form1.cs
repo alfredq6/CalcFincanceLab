@@ -23,6 +23,13 @@ namespace CalcFincanceLab
         private Table1_Data Table1Data => new Table1_Data(m_BaseData);
         private Table2_Data Table2Data => new Table2_Data(Table1Data);
         private Table3_Data Table3Data => new Table3_Data(m_BaseData);
+        private Table4_Data Table4Data => new Table4_Data(m_BaseData, Table3Data);
+        private Table5_Data Table5Data => new Table5_Data(m_BaseData, Table4Data);
+        private Table6_Data Table6Data => new Table6_Data(m_BaseData, Table5Data);
+        private Table7_Data Table7Data => new Table7_Data(m_BaseData, Table4Data);
+        private Table8_Data Table8Data => new Table8_Data(m_BaseData, Table7Data);
+        private Table9_Data Table9Data => new Table9_Data(m_BaseData, Table8Data);
+        private Table10_Data Table10Data => new Table10_Data(m_BaseData, Table8Data);
         private Table11_Data Table11Data => new Table11_Data(m_BaseData);
 
         public Form1()
@@ -236,53 +243,39 @@ namespace CalcFincanceLab
 
         private DataTable CreateTable4()
         {
-            DataTable table = new DataTable("Бюджет потребности в Материале 1");
+            var table = new DataTable("Бюджет потребности в Материале 1");
+            DataTables.Add((table, Table4Data));
 
             AddQuartersAndYearColumns(table);
 
-            // Добавляем данные
-            table.Rows.Add("Объем производства Продукта А, шт.", "", "", "", "", "", "", "", "", "", "", "");
-            table.Rows.Add("Объем производства Продукта В, шт.", "", "", "", "", "", "", "", "", "", "", "");
-            table.Rows.Add("норма расхода для Продукта А, м.", "", "", "", "", "", "", "", "", "", "", "");
-            table.Rows.Add("норма расхода для Продукта В, м.", "", "", "", "", "", "", "", "", "", "", "");
-            table.Rows.Add("Потребность на объем производства Продукта А, м.", "", "", "", "", "", "", "", "", "", "", "");
-            table.Rows.Add("Потребность на объем производства Продукта В, м.", "", "", "", "", "", "", "", "", "", "", "");
-            table.Rows.Add("Итого потребность на объем производства, м.", "", "", "", "", "", "", "", "", "", "", "");
-            table.Rows.Add("остаток на начало, м.", "", "", "", "", "", "", "", "", "", "", "");
-            table.Rows.Add("остаток на конец, м.", "", "", "", "", "", "", "", "", "", "", "");
-            table.Rows.Add("ИТОГО К закупке, м.", "", "", "", "", "", "", "", "", "", "", "");
+            foreach (var rowData in Table4Data.GetRows())
+                table.Rows.Add(rowData);
 
             return table;
         }
 
         private DataTable CreateTable5()
         {
-            DataTable table = new DataTable("Бюджет закупки Материала 1 у Поставщика 1");
+            var table = new DataTable("Бюджет закупки Материала 1 у Поставщика 1");
+            DataTables.Add((table, Table5Data));
 
             AddQuartersAndYearColumns(table);
 
-            // Добавляем данные
-            table.Rows.Add("К закупке, м.", "", "", "", "", "", "", "", "", "", "", "");
-            table.Rows.Add("цена закупки, руб.", "", "", "", "", "", "", "", "", "", "", "");
-            table.Rows.Add("Стоимость закупки, руб.", "", "", "", "", "", "", "", "", "", "", "");
-            table.Rows.Add("Транспортно-заготовительные расходы, руб.", "", "", "", "", "", "", "", "", "", "", "");
-            table.Rows.Add("ИТОГО Закупка, руб.", "", "", "", "", "", "", "", "", "", "", "");
+            foreach (var rowData in Table5Data.GetRows())
+                table.Rows.Add(rowData);
 
             return table;
         }
 
         private DataTable CreateTable6()
         {
-            DataTable table = new DataTable("График платежей Поставщику 1 за Материал 1");
+            var table = new DataTable("График платежей Поставщику 1 за Материал 1");
+            DataTables.Add((table, Table6Data));
 
             AddQuartersAndYearColumns(table);
 
-            // Добавляем данные
-            table.Rows.Add("Платежи 1-го квартала, руб.", "", "", "", "", "", "", "", "", "", "", "");
-            table.Rows.Add("Платежи 2-го квартала, руб.", "", "", "", "", "", "", "", "", "", "", "");
-            table.Rows.Add("Платежи 3-го квартала, руб.", "", "", "", "", "", "", "", "", "", "", "");
-            table.Rows.Add("Платежи 4-го квартала, руб.", "", "", "", "", "", "", "", "", "", "", "");
-            table.Rows.Add("ИТОГО", "", "", "", "", "", "", "", "", "", "", "");
+            foreach (var rowData in Table6Data.GetRows())
+                table.Rows.Add(rowData);
 
             return table;
         }
@@ -290,17 +283,12 @@ namespace CalcFincanceLab
         private DataTable CreateTable7()
         {
             DataTable table = new DataTable("Бюджет потребности в Рабочем 1");
+            DataTables.Add((table, Table7Data));
 
             AddQuartersAndYearColumns(table);
 
-            // Добавляем данные
-            table.Rows.Add("Объем производства Продукта А, шт.", "", "", "", "", "", "", "", "", "", "", "");
-            table.Rows.Add("Объем производства Продукта В, шт.", "", "", "", "", "", "", "", "", "", "", "");
-            table.Rows.Add("трудоемкость для Продукта А, чел-ч.", "", "", "", "", "", "", "", "", "", "", "");
-            table.Rows.Add("трудоемкость для Продукта В, чел-ч.", "", "", "", "", "", "", "", "", "", "", "");
-            table.Rows.Add("Трудоемкость на объем производства Продукта А, чел-ч.", "", "", "", "", "", "", "", "", "", "", "");
-            table.Rows.Add("Трудоемкость на объем производства Продукта В, чел-ч.", "", "", "", "", "", "", "", "", "", "", "");
-            table.Rows.Add("Итого Трудоемкость на объем производства, чел-ч.", "", "", "", "", "", "", "", "", "", "", "");
+            foreach (var rowData in Table7Data.GetRows())
+                table.Rows.Add(rowData);
 
             return table;
         }
@@ -308,15 +296,12 @@ namespace CalcFincanceLab
         private DataTable CreateTable8()
         {
             DataTable table = new DataTable("Бюджет расходов на оплату труда Рабочего 1");
+            DataTables.Add((table, Table8Data));
 
             AddQuartersAndYearColumns(table);
 
-            // Добавляем данные
-            table.Rows.Add("Итого Трудоемкость на объем производства, чел-ч.", "", "", "", "", "", "", "", "", "", "", "");
-            table.Rows.Add("Часовая тарифная ставка, руб.", "", "", "", "", "", "", "", "", "", "", "");
-            table.Rows.Add("Заработная плата, руб.", "", "", "", "", "", "", "", "", "", "", "");
-            table.Rows.Add("Отчисления на заработную плату, руб.", "", "", "", "", "", "", "", "", "", "", "");
-            table.Rows.Add("ИТОГО Расходы на оплату труда, руб.", "", "", "", "", "", "", "", "", "", "", "");
+            foreach (var rowData in Table8Data.GetRows())
+                table.Rows.Add(rowData);
 
             return table;
         }
@@ -324,15 +309,12 @@ namespace CalcFincanceLab
         private DataTable CreateTable9()
         {
             DataTable table = new DataTable("Бюджет общепроизводственных расходов");
+            DataTables.Add((table, Table9Data));
 
             AddQuartersAndYearColumns(table);
 
-            // Добавляем данные
-            table.Rows.Add("Электроэнергия на производственные цели", "", "", "", "", "", "", "", "", "", "", "");
-            table.Rows.Add("Амортизация производственного оборудования", "", "", "", "", "", "", "", "", "", "", "");
-            table.Rows.Add("Заработная плата, руб.", "", "", "", "", "", "", "", "", "", "", "");
-            table.Rows.Add("Отчисления на заработную плату, руб.", "", "", "", "", "", "", "", "", "", "", "");
-            table.Rows.Add("ИТОГО, руб.", "", "", "", "", "", "", "", "", "", "", "");
+            foreach (var rowData in Table9Data.GetRows())
+                table.Rows.Add(rowData);
 
             return table;
         }
@@ -340,15 +322,12 @@ namespace CalcFincanceLab
         private DataTable CreateTable10()
         {
             DataTable table = new DataTable("Бюджет общехозяйственных расходов");
+            DataTables.Add((table, Table10Data));
 
             AddQuartersAndYearColumns(table);
 
-            // Добавляем данные
-            table.Rows.Add("Электроэнергия на общехозяйственные цели", "", "", "", "", "", "", "", "", "", "", "");
-            table.Rows.Add("Телефон, Интернет", "", "", "", "", "", "", "", "", "", "", "");
-            table.Rows.Add("Заработная плата, руб.", "", "", "", "", "", "", "", "", "", "", "");
-            table.Rows.Add("Отчисления на заработную плату, руб.", "", "", "", "", "", "", "", "", "", "", "");
-            table.Rows.Add("ИТОГО, руб.", "", "", "", "", "", "", "", "", "", "", "");
+            foreach (var rowData in Table10Data.GetRows())
+                table.Rows.Add(rowData);
 
             return table;
         }
@@ -504,6 +483,10 @@ namespace CalcFincanceLab
 
         private void RecalculateButton_Click(object sender, EventArgs e)
         {
+            foreach (var dataTable in DataTables)
+            {
+                dataTable.tableData.ClearCachedData();
+            }
             foreach (var dataTable in DataTables)
             {
                 dataTable.table.Rows.Clear();

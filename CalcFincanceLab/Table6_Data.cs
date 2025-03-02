@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace CalcFincanceLab
 {
-    public class Table2_Data : ITable_Data
+    public class Table6_Data : ITable_Data
     {
-        private readonly Table1_Data m_Table1_Data;
+        private readonly BaseData m_Data;
+        private readonly Table5_Data m_Table5_Data;
 
         private List<DataValues> m_FirstQuaterPayments_Values;
         private List<DataValues> m_SecondQuaterPayments_Values;
@@ -16,9 +17,10 @@ namespace CalcFincanceLab
         private List<DataValues> m_FourthQuaterPayments_Values;
         private List<DataValues> m_ResultPayments_Values;
 
-        public Table2_Data(Table1_Data table1_Data)
+        public Table6_Data(BaseData data, Table5_Data table5_Data)
         {
-            m_Table1_Data = table1_Data;
+            m_Data = data;
+            m_Table5_Data = table5_Data;
         }
 
         public void ClearCachedData()
@@ -30,14 +32,13 @@ namespace CalcFincanceLab
             m_ResultPayments_Values = null;
         }
 
-
         public List<object[]> GetRows()
         {
             return new List<object[]>
             {
                 new List<object>
                 {
-                    "платежи 1-го квартала, руб. (Итого №1)",
+                    "Платежи 1-го квартала, руб.",
                     FirstQuaterPayments_Values[0].PlannedValue,
                     FirstQuaterPayments_Values[0].ActualValue,
                     FirstQuaterPayments_Values[0].DeviationValue,
@@ -57,7 +58,7 @@ namespace CalcFincanceLab
 
                 new List<object>
                 {
-                    "платежи 2-го квартала, руб. (Итого №1)",
+                    "Платежи 2-го квартала, руб.",
                     SecondQuaterPayments_Values[0].PlannedValue,
                     SecondQuaterPayments_Values[0].ActualValue,
                     SecondQuaterPayments_Values[0].DeviationValue,
@@ -77,7 +78,7 @@ namespace CalcFincanceLab
 
                 new List<object>
                 {
-                    "платежи 3-го квартала, руб. (Итого №1)",
+                    "Платежи 3-го квартала, руб.",
                     ThirdQuaterPayments_Values[0].PlannedValue,
                     ThirdQuaterPayments_Values[0].ActualValue,
                     ThirdQuaterPayments_Values[0].DeviationValue,
@@ -97,7 +98,7 @@ namespace CalcFincanceLab
 
                 new List<object>
                 {
-                    "платежи 4-го квартала, руб. (Итого №1)",
+                    "Платежи 4-го квартала, руб.",
                     FourthQuaterPayments_Values[0].PlannedValue,
                     FourthQuaterPayments_Values[0].ActualValue,
                     FourthQuaterPayments_Values[0].DeviationValue,
@@ -117,7 +118,7 @@ namespace CalcFincanceLab
 
                 new List<object>
                 {
-                    "ИТОГО платежи, руб.",
+                    "ИТОГО",
                     ResultPayments_Values[0].PlannedValue,
                     ResultPayments_Values[0].ActualValue,
                     ResultPayments_Values[0].DeviationValue,
@@ -145,8 +146,12 @@ namespace CalcFincanceLab
                     return m_FirstQuaterPayments_Values;
 
                 var quaters = new List<DataValues> {
-                    new DataValues(m_Table1_Data.Result_SalesVolumePrice_Values[0].PlannedValue / 2, m_Table1_Data.Result_SalesVolumePrice_Values[0].ActualValue / 2),
-                    new DataValues(m_Table1_Data.Result_SalesVolumePrice_Values[0].PlannedValue / 2, m_Table1_Data.Result_SalesVolumePrice_Values[0].ActualValue / 2),
+                    new DataValues(
+                        m_Table5_Data.ResultPurchase_Values[0].PlannedValue * m_Data.PaymentInTheDeliveryPeriod / 100,
+                        m_Table5_Data.ResultPurchase_Values[0].ActualValue * m_Data.PaymentInTheDeliveryPeriod / 100),
+                    new DataValues(
+                        m_Table5_Data.ResultPurchase_Values[0].PlannedValue * m_Data.AtTheEndOfTheQuarterTheStockOfTheRequirementsOfTheNextPeriod / 100,
+                        m_Table5_Data.ResultPurchase_Values[0].ActualValue * m_Data.AtTheEndOfTheQuarterTheStockOfTheRequirementsOfTheNextPeriod / 100),
                     new DataValues(0, 0),
                     new DataValues(0, 0),
                 };
@@ -165,8 +170,12 @@ namespace CalcFincanceLab
 
                 var quaters = new List<DataValues> {
                     new DataValues(0, 0),
-                    new DataValues(m_Table1_Data.Result_SalesVolumePrice_Values[1].PlannedValue / 2, m_Table1_Data.Result_SalesVolumePrice_Values[1].ActualValue / 2),
-                    new DataValues(m_Table1_Data.Result_SalesVolumePrice_Values[1].PlannedValue / 2, m_Table1_Data.Result_SalesVolumePrice_Values[1].ActualValue / 2),
+                    new DataValues(
+                        m_Table5_Data.ResultPurchase_Values[1].PlannedValue * m_Data.PaymentInTheDeliveryPeriod / 100,
+                        m_Table5_Data.ResultPurchase_Values[1].ActualValue * m_Data.PaymentInTheDeliveryPeriod / 100),
+                    new DataValues(
+                        m_Table5_Data.ResultPurchase_Values[1].PlannedValue * m_Data.AtTheEndOfTheQuarterTheStockOfTheRequirementsOfTheNextPeriod / 100,
+                        m_Table5_Data.ResultPurchase_Values[1].ActualValue * m_Data.AtTheEndOfTheQuarterTheStockOfTheRequirementsOfTheNextPeriod / 100),
                     new DataValues(0, 0),
                 };
                 var year = new DataValues(quaters.Sum(x => x.PlannedValue), quaters.Sum(x => x.ActualValue));
@@ -185,8 +194,12 @@ namespace CalcFincanceLab
                 var quaters = new List<DataValues> {
                     new DataValues(0, 0),
                     new DataValues(0, 0),
-                    new DataValues(m_Table1_Data.Result_SalesVolumePrice_Values[2].PlannedValue / 2, m_Table1_Data.Result_SalesVolumePrice_Values[2].ActualValue / 2),
-                    new DataValues(m_Table1_Data.Result_SalesVolumePrice_Values[2].PlannedValue / 2, m_Table1_Data.Result_SalesVolumePrice_Values[2].ActualValue / 2),
+                    new DataValues(
+                        m_Table5_Data.ResultPurchase_Values[2].PlannedValue * m_Data.PaymentInTheDeliveryPeriod / 100,
+                        m_Table5_Data.ResultPurchase_Values[2].ActualValue * m_Data.PaymentInTheDeliveryPeriod / 100),
+                    new DataValues(
+                        m_Table5_Data.ResultPurchase_Values[2].PlannedValue * m_Data.AtTheEndOfTheQuarterTheStockOfTheRequirementsOfTheNextPeriod / 100,
+                        m_Table5_Data.ResultPurchase_Values[2].ActualValue * m_Data.AtTheEndOfTheQuarterTheStockOfTheRequirementsOfTheNextPeriod / 100),
                 };
                 var year = new DataValues(quaters.Sum(x => x.PlannedValue), quaters.Sum(x => x.ActualValue));
                 m_ThirdQuaterPayments_Values = new List<DataValues>(quaters) { year };
@@ -205,7 +218,9 @@ namespace CalcFincanceLab
                     new DataValues(0, 0),
                     new DataValues(0, 0),
                     new DataValues(0, 0),
-                    new DataValues(m_Table1_Data.Result_SalesVolumePrice_Values[3].PlannedValue / 2, m_Table1_Data.Result_SalesVolumePrice_Values[3].ActualValue / 2),
+                    new DataValues(
+                        m_Table5_Data.ResultPurchase_Values[3].PlannedValue * m_Data.PaymentInTheDeliveryPeriod / 100,
+                        m_Table5_Data.ResultPurchase_Values[3].ActualValue * m_Data.PaymentInTheDeliveryPeriod / 100),
                 };
                 var year = new DataValues(quaters.Sum(x => x.PlannedValue), quaters.Sum(x => x.ActualValue));
                 m_FourthQuaterPayments_Values = new List<DataValues>(quaters) { year };
