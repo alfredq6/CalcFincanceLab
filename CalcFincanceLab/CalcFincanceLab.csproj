@@ -62,6 +62,8 @@
     <Compile Include="DataValues.cs" />
     <Compile Include="Table10_Data.cs" />
     <Compile Include="Table11_Data.cs" />
+    <Compile Include="Table12_Data.cs" />
+    <Compile Include="Table13_Data.cs" />
     <Compile Include="Table1_Data.cs" />
     <Compile Include="Table2_Data.cs" />
     <Compile Include="Table3_Data.cs" />

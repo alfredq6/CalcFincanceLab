@@ -31,6 +31,8 @@ namespace CalcFincanceLab
         private Table9_Data Table9Data => new Table9_Data(m_BaseData, Table8Data);
         private Table10_Data Table10Data => new Table10_Data(m_BaseData, Table8Data);
         private Table11_Data Table11Data => new Table11_Data(m_BaseData);
+        private Table12_Data Table12Data => new Table12_Data(m_BaseData, Table4Data, Table5Data, Table7Data, Table9Data, Table10Data, Table11Data);
+        private Table13_Data Table13Data => new Table13_Data(m_BaseData, Table1Data, Table7Data, Table10Data, Table11Data, Table12Data);
 
         public Form1()
         {
@@ -282,7 +284,7 @@ namespace CalcFincanceLab
 
         private DataTable CreateTable7()
         {
-            DataTable table = new DataTable("Бюджет потребности в Рабочем 1");
+            var table = new DataTable("Бюджет потребности в Рабочем 1");
             DataTables.Add((table, Table7Data));
 
             AddQuartersAndYearColumns(table);
@@ -295,7 +297,7 @@ namespace CalcFincanceLab
 
         private DataTable CreateTable8()
         {
-            DataTable table = new DataTable("Бюджет расходов на оплату труда Рабочего 1");
+            var table = new DataTable("Бюджет расходов на оплату труда Рабочего 1");
             DataTables.Add((table, Table8Data));
 
             AddQuartersAndYearColumns(table);
@@ -308,7 +310,7 @@ namespace CalcFincanceLab
 
         private DataTable CreateTable9()
         {
-            DataTable table = new DataTable("Бюджет общепроизводственных расходов");
+            var table = new DataTable("Бюджет общепроизводственных расходов");
             DataTables.Add((table, Table9Data));
 
             AddQuartersAndYearColumns(table);
@@ -321,7 +323,7 @@ namespace CalcFincanceLab
 
         private DataTable CreateTable10()
         {
-            DataTable table = new DataTable("Бюджет общехозяйственных расходов");
+            var table = new DataTable("Бюджет общехозяйственных расходов");
             DataTables.Add((table, Table10Data));
 
             AddQuartersAndYearColumns(table);
@@ -341,34 +343,22 @@ namespace CalcFincanceLab
 
             foreach (var rowData in Table11Data.GetRows())
                 table.Rows.Add(rowData);
-            
 
             return table;
         }
 
         private DataTable CreateTable12()
         {
-            DataTable table = new DataTable("Бюджет себестоимости");
+            var table = new DataTable("Бюджет себестоимости");
+            DataTables.Add((table, Table12Data));
 
-            // Добавляем столбцы
             table.Columns.Add(new DataColumn("статья затрат", typeof(string)) { ReadOnly = true });
             table.Columns.Add(new DataColumn("Продукт А", typeof(string)) { ReadOnly = true });
             table.Columns.Add(new DataColumn("Продукт В", typeof(string)) { ReadOnly = true });
             table.Columns.Add(new DataColumn("Итого", typeof(string)) { ReadOnly = true });
 
-            // Добавляем данные
-            table.Rows.Add("Прямые расходы, в том числе", "", "", "");
-            table.Rows.Add("….затраты на Материал 1", "", "", "");
-            table.Rows.Add("….транспортно-заготовительные расходы", "", "", "");
-            table.Rows.Add("….затраты на оплату труда Рабочего 1", "", "", "");
-            table.Rows.Add("Объем производства Продукта, шт.", "", "", "");
-            table.Rows.Add("Себестоимость по прямым расходам, руб.", "", "", "");
-            table.Rows.Add("Себестоимость производства, руб.", "", "", "");
-            table.Rows.Add("Себестоимость единицы, руб.", "", "", "");
-            table.Rows.Add("Косвенные расходы, в том числе", "", "", "");
-            table.Rows.Add("….общепроизводственные расходы", "", "", "");
-            table.Rows.Add("….общехозяйственные расходы", "", "", "");
-            table.Rows.Add("….коммерческие расходы", "", "", "");
+            foreach (var rowData in Table12Data.GetRows())
+                table.Rows.Add(rowData);
 
             return table;
         }
@@ -376,15 +366,12 @@ namespace CalcFincanceLab
         private DataTable CreateTable13()
         {
             DataTable table = new DataTable("Отчет о прибылях и убытках");
+            DataTables.Add((table, Table13Data));
 
             AddQuartersAndYearColumns(table);
 
-            // Добавляем данные
-            table.Rows.Add("Выручка, руб.", "", "", "", "", "", "", "", "", "", "", "");
-            table.Rows.Add("Себестоимость продаж, руб.", "", "", "", "", "", "", "", "", "", "", "");
-            table.Rows.Add("Управленческие расходы, руб.", "", "", "", "", "", "", "", "", "", "", "");
-            table.Rows.Add("Коммерческие расходы, руб.", "", "", "", "", "", "", "", "", "", "", "");
-            table.Rows.Add("Прибыль, руб.", "", "", "", "", "", "", "", "", "", "", "");
+            foreach (var rowData in Table13Data.GetRows())
+                table.Rows.Add(rowData);
 
             return table;
         }
