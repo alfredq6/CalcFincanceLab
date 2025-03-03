@@ -1,14 +1,9 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CalcFincanceLab
@@ -33,6 +28,7 @@ namespace CalcFincanceLab
         private Table11_Data Table11Data => new Table11_Data(m_BaseData);
         private Table12_Data Table12Data => new Table12_Data(m_BaseData, Table4Data, Table5Data, Table7Data, Table9Data, Table10Data, Table11Data);
         private Table13_Data Table13Data => new Table13_Data(m_BaseData, Table1Data, Table7Data, Table10Data, Table11Data, Table12Data);
+        private Table15_Data Table15Data => new Table15_Data(m_BaseData, Table3Data, Table4Data, Table5Data, Table6Data, Table9Data, Table12Data, Table13Data);
 
         public Form1()
         {
@@ -365,7 +361,7 @@ namespace CalcFincanceLab
 
         private DataTable CreateTable13()
         {
-            DataTable table = new DataTable("Отчет о прибылях и убытках");
+            var table = new DataTable("Отчет о прибылях и убытках");
             DataTables.Add((table, Table13Data));
 
             AddQuartersAndYearColumns(table);
@@ -412,36 +408,15 @@ namespace CalcFincanceLab
 
         private DataTable CreateTable15()
         {
-            DataTable table = new DataTable("Баланс");
+            var table = new DataTable("Баланс");
+            DataTables.Add((table, Table15Data));
 
-            // Добавляем столбцы
             table.Columns.Add(new DataColumn("Статья баланса", typeof(string)) { ReadOnly = true });
             table.Columns.Add(new DataColumn("Начало года", typeof(string)) { ReadOnly = true });
             table.Columns.Add(new DataColumn("Конец года", typeof(string)) { ReadOnly = true });
 
-            // Добавляем данные
-            table.Rows.Add("Основные средства", "", "");
-            table.Rows.Add("износ основных средств", "", "");
-            table.Rows.Add("нематериальные активы", "", "");
-            table.Rows.Add("износ нематериальных активов", "", "");
-            table.Rows.Add("ИТОГО внеоборотные активы", "", "");
-            table.Rows.Add("Производственные запасы", "", "");
-            table.Rows.Add("транспортно-заготовительные расходы", "", "");
-            table.Rows.Add("основное производство", "", "");
-            table.Rows.Add("вспомогательное производство", "", "");
-            table.Rows.Add("касса", "", "");
-            table.Rows.Add("расчетный счет", "", "");
-            table.Rows.Add("готовая продукция", "", "");
-            table.Rows.Add("Итого оборотные активы", "", "");
-            table.Rows.Add("АКТИВ", "", "");
-            table.Rows.Add("Уставный фонд", "", "");
-            table.Rows.Add("Прибыль", "", "");
-            table.Rows.Add("Кредиторская задолженность", "", "");
-            table.Rows.Add("Кредит банка", "", "");
-            table.Rows.Add("Оплата труда", "", "");
-            table.Rows.Add("Налоги и отчисления", "", "");
-            table.Rows.Add("Отклонения", "", "");
-            table.Rows.Add("ПАССИВ", "", "");
+            foreach (var rowData in Table15Data.GetRows())
+                table.Rows.Add(rowData);
 
             return table;
         }

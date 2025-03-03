@@ -11,3 +11,16 @@ C:\Users\alfre\source\repos\CalcFincanceLab\CalcFincanceLab\obj\Debug\CalcFincan
 C:\Users\alfre\source\repos\CalcFincanceLab\CalcFincanceLab\bin\Debug\Newtonsoft.Json.dll
 C:\Users\alfre\source\repos\CalcFincanceLab\CalcFincanceLab\bin\Debug\Newtonsoft.Json.xml
 C:\Users\alfre\source\repos\CalcFincanceLab\CalcFincanceLab\obj\Debug\CalcFincanceLab.csproj.CopyComplete
+C:\Users\Maxim_Kaloupaev\source\repos\CalcFincanceLab\CalcFincanceLab\bin\Debug\CalcFincanceLab.exe.config
+C:\Users\Maxim_Kaloupaev\source\repos\CalcFincanceLab\CalcFincanceLab\bin\Debug\CalcFincanceLab.exe
+C:\Users\Maxim_Kaloupaev\source\repos\CalcFincanceLab\CalcFincanceLab\bin\Debug\CalcFincanceLab.pdb
+C:\Users\Maxim_Kaloupaev\source\repos\CalcFincanceLab\CalcFincanceLab\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Maxim_Kaloupaev\source\repos\CalcFincanceLab\CalcFincanceLab\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Maxim_Kaloupaev\source\repos\CalcFincanceLab\CalcFincanceLab\obj\Debug\CalcFincanceLab.csproj.AssemblyReference.cache
+C:\Users\Maxim_Kaloupaev\source\repos\CalcFincanceLab\CalcFincanceLab\obj\Debug\CalcFincanceLab.Form1.resources
+C:\Users\Maxim_Kaloupaev\source\repos\CalcFincanceLab\CalcFincanceLab\obj\Debug\CalcFincanceLab.Properties.Resources.resources
+C:\Users\Maxim_Kaloupaev\source\repos\CalcFincanceLab\CalcFincanceLab\obj\Debug\CalcFincanceLab.csproj.GenerateResource.cache
+C:\Users\Maxim_Kaloupaev\source\repos\CalcFincanceLab\CalcFincanceLab\obj\Debug\CalcFincanceLab.csproj.CoreCompileInputs.cache
+C:\Users\Maxim_Kaloupaev\source\repos\CalcFincanceLab\CalcFincanceLab\obj\Debug\CalcFinc.F7FD327B.Up2Date
+C:\Users\Maxim_Kaloupaev\source\repos\CalcFincanceLab\CalcFincanceLab\obj\Debug\CalcFincanceLab.exe
+C:\Users\Maxim_Kaloupaev\source\repos\CalcFincanceLab\CalcFincanceLab\obj\Debug\CalcFincanceLab.pdb
