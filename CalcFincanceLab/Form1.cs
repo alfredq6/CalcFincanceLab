@@ -28,6 +28,7 @@ namespace CalcFincanceLab
         private Table11_Data Table11Data => new Table11_Data(m_BaseData);
         private Table12_Data Table12Data => new Table12_Data(m_BaseData, Table4Data, Table5Data, Table7Data, Table9Data, Table10Data, Table11Data);
         private Table13_Data Table13Data => new Table13_Data(m_BaseData, Table1Data, Table7Data, Table10Data, Table11Data, Table12Data);
+        private Table14_Data Table14Data => new Table14_Data(m_BaseData, Table2Data, Table6Data, Table8Data, Table10Data, Table13Data);
         private Table15_Data Table15Data => new Table15_Data(m_BaseData, Table3Data, Table4Data, Table5Data, Table6Data, Table9Data, Table12Data, Table13Data);
 
         public Form1()
@@ -374,34 +375,13 @@ namespace CalcFincanceLab
 
         private DataTable CreateTable14()
         {
-            DataTable table = new DataTable("Прогноз движения денежных средств");
+            var table = new DataTable("Прогноз движения денежных средств");
+            DataTables.Add((table, Table14Data));
 
             AddQuartersAndYearColumns(table);
 
-            // Добавляем данные
-            table.Rows.Add("Операционная деятельность", "", "", "", "", "", "", "", "", "", "", "");
-            table.Rows.Add("….Поступление от покупателей", "", "", "", "", "", "", "", "", "", "", "");
-            table.Rows.Add("..Приток", "", "", "", "", "", "", "", "", "", "", "");
-            table.Rows.Add("..Отток, в том числе", "", "", "", "", "", "", "", "", "", "", "");
-            table.Rows.Add("....Платежи за материалы", "", "", "", "", "", "", "", "", "", "", "");
-            table.Rows.Add("….Выплата ЗП", "", "", "", "", "", "", "", "", "", "", "");
-            table.Rows.Add("….Перечисление в ФСЗН", "", "", "", "", "", "", "", "", "", "", "");
-            table.Rows.Add("….Платежи за электроэнергию", "", "", "", "", "", "", "", "", "", "", "");
-            table.Rows.Add("….Платежи за рекламу", "", "", "", "", "", "", "", "", "", "", "");
-            table.Rows.Add("….Платежи за телефон, интернет", "", "", "", "", "", "", "", "", "", "", "");
-            table.Rows.Add("….Платежи прочие", "", "", "", "", "", "", "", "", "", "", "");
-            table.Rows.Add("Операционный чистый денежный поток", "", "", "", "", "", "", "", "", "", "", "");
-            table.Rows.Add("Инвестиционная деятельность", "", "", "", "", "", "", "", "", "", "", "");
-            table.Rows.Add("..Приток", "", "", "", "", "", "", "", "", "", "", "");
-            table.Rows.Add("..Отток", "", "", "", "", "", "", "", "", "", "", "");
-            table.Rows.Add("Инвестиционный чистый денежный поток", "", "", "", "", "", "", "", "", "", "", "");
-            table.Rows.Add("Финансовая деятельность", "", "", "", "", "", "", "", "", "", "", "");
-            table.Rows.Add("..Приток", "", "", "", "", "", "", "", "", "", "", "");
-            table.Rows.Add("..Отток", "", "", "", "", "", "", "", "", "", "", "");
-            table.Rows.Add("Финансовый чистый денежный поток", "", "", "", "", "", "", "", "", "", "", "");
-            table.Rows.Add("ИТОГО чистый денежный поток", "", "", "", "", "", "", "", "", "", "", "");
-            table.Rows.Add("Остаток на начало", "", "", "", "", "", "", "", "", "", "", "");
-            table.Rows.Add("Остаток на конец", "", "", "", "", "", "", "", "", "", "", "");
+            foreach (var rowData in Table14Data.GetRows())
+                table.Rows.Add(rowData);
 
             return table;
         }
@@ -423,8 +403,6 @@ namespace CalcFincanceLab
 
         private void AddQuartersAndYearColumns(DataTable table)
         {
-            // Добавляем столбцы
-
             table.Columns.Add(new DataColumn("Показатель", typeof(string)) { ReadOnly = true });
             for (int i = 1; i <= 4; i++)
             {
