@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CalcFincanceLab
 {
@@ -26,7 +23,7 @@ namespace CalcFincanceLab
         public void ClearCachedData()
         {
             m_ProductA_SalesVolume_Values = null;
-            m_ProductA_SalesVolume_Values = null;
+            m_ProductB_SalesVolume_Values = null;
             m_ProductA_Price_Values = null;
             m_ProductB_Price_Values = null;
             m_ProductA_SalesVolumePrice_Values = null;
@@ -237,7 +234,7 @@ namespace CalcFincanceLab
                     new DataValues(plannedValue, actualValue),
                     new DataValues(plannedValue, actualValue),
                 };
-                var year = new DataValues(quaters.Sum(x => x.PlannedValue), quaters.Sum(x => x.ActualValue));
+                var year = new DataValues(plannedValue, actualValue);
                 m_ProductA_Price_Values = new List<DataValues>(quaters) { year };
                 return m_ProductA_Price_Values;
             }
@@ -258,7 +255,7 @@ namespace CalcFincanceLab
                     new DataValues(plannedValue, actualValue),
                     new DataValues(plannedValue, actualValue),
                 };
-                var year = new DataValues(quaters.Sum(x => x.PlannedValue), quaters.Sum(x => x.ActualValue));
+                var year = new DataValues(plannedValue, actualValue);
                 m_ProductB_Price_Values = new List<DataValues>(quaters) { year };
                 return m_ProductB_Price_Values;
             }

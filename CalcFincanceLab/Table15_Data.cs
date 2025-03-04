@@ -12,6 +12,7 @@ namespace CalcFincanceLab
         private readonly Table9_Data m_Table9_Data;
         private readonly Table12_Data m_Table12_Data;
         private readonly Table13_Data m_Table13_Data;
+        private readonly Table14_Data m_Table14_Data;
 
         private List<double> m_FixedAssets_Values;
         private List<double> m_DepreciationFixedAssets_Values;
@@ -37,7 +38,7 @@ namespace CalcFincanceLab
         private List<double> m_Passive_Values;
 
         public Table15_Data(BaseData data, Table3_Data table3_Data, Table4_Data table4_Data, Table5_Data table5_Data, Table6_Data table6_Data,
-                            Table9_Data table9_Data, Table12_Data table12_Data, Table13_Data table13_Data)
+                            Table9_Data table9_Data, Table12_Data table12_Data, Table13_Data table13_Data, Table14_Data table14_Data)
         {
             m_Data = data;
             m_Table3_Data = table3_Data;
@@ -47,6 +48,7 @@ namespace CalcFincanceLab
             m_Table9_Data = table9_Data;
             m_Table12_Data = table12_Data;
             m_Table13_Data = table13_Data;
+            m_Table14_Data = table14_Data;
         }
 
         public void ClearCachedData()
@@ -393,8 +395,8 @@ namespace CalcFincanceLab
                     return m_CurrentAccount_Values;
 
                 m_CurrentAccount_Values = new List<double> {
-                    FixedAssets_Values[0],
-                    0,
+                    m_Table14_Data.RemainingAtTheBeginning_Values[4].PlannedValue,
+                    m_Table14_Data.RemainingAtTheEnd_Values[4].ActualValue,
                 };
                 return m_CurrentAccount_Values;
             }
@@ -544,7 +546,7 @@ namespace CalcFincanceLab
 
                 m_Deviations_Values = new List<double> {
                     0,
-                    0,
+                    Active_Values[1] - (AuthorizedCapital_Values[1] + Profit_Values[1] + AccountsPayable_Values[1] + BankLoan_Values[1] + Remuneration_Values[1] + TaxesAndDeductions_Values[1]),
                 };
                 return m_Deviations_Values;
             }
@@ -558,8 +560,8 @@ namespace CalcFincanceLab
                     return m_Passive_Values;
 
                 m_Passive_Values = new List<double> {
-                    AuthorizedCapital_Values[0] + Profit_Values[0] + AccountsPayable_Values[0] + BankLoan_Values[0] + Remuneration_Values[0] + TaxesAndDeductions_Values[0] + Deviations_Values[0],
-                    AuthorizedCapital_Values[1] + Profit_Values[1] + AccountsPayable_Values[1] + BankLoan_Values[1] + Remuneration_Values[1] + TaxesAndDeductions_Values[1] + Deviations_Values[1],
+                    AuthorizedCapital_Values[0] + Profit_Values[0] + AccountsPayable_Values[0] + BankLoan_Values[0] + Remuneration_Values[0] + TaxesAndDeductions_Values[0],
+                    AuthorizedCapital_Values[1] + Profit_Values[1] + AccountsPayable_Values[1] + BankLoan_Values[1] + Remuneration_Values[1] + TaxesAndDeductions_Values[1],
                 };
                 return m_Passive_Values;
             }

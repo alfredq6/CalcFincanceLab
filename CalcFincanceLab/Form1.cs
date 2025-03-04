@@ -15,21 +15,37 @@ namespace CalcFincanceLab
         private List<(DataTable table, ITable_Data tableData)> DataTables = new List<(DataTable table, ITable_Data tableData)>();
 
         private BaseData m_BaseData = new BaseData();
-        private Table1_Data Table1Data => new Table1_Data(m_BaseData);
-        private Table2_Data Table2Data => new Table2_Data(Table1Data);
-        private Table3_Data Table3Data => new Table3_Data(m_BaseData);
-        private Table4_Data Table4Data => new Table4_Data(m_BaseData, Table3Data);
-        private Table5_Data Table5Data => new Table5_Data(m_BaseData, Table4Data);
-        private Table6_Data Table6Data => new Table6_Data(m_BaseData, Table5Data);
-        private Table7_Data Table7Data => new Table7_Data(m_BaseData, Table4Data);
-        private Table8_Data Table8Data => new Table8_Data(m_BaseData, Table7Data);
-        private Table9_Data Table9Data => new Table9_Data(m_BaseData, Table8Data);
-        private Table10_Data Table10Data => new Table10_Data(m_BaseData, Table8Data);
-        private Table11_Data Table11Data => new Table11_Data(m_BaseData);
-        private Table12_Data Table12Data => new Table12_Data(m_BaseData, Table4Data, Table5Data, Table7Data, Table9Data, Table10Data, Table11Data);
-        private Table13_Data Table13Data => new Table13_Data(m_BaseData, Table1Data, Table7Data, Table10Data, Table11Data, Table12Data);
-        private Table14_Data Table14Data => new Table14_Data(m_BaseData, Table2Data, Table6Data, Table8Data, Table10Data, Table13Data);
-        private Table15_Data Table15Data => new Table15_Data(m_BaseData, Table3Data, Table4Data, Table5Data, Table6Data, Table9Data, Table12Data, Table13Data);
+        private Table1_Data m_Table1Data;
+        private Table2_Data m_Table2Data;
+        private Table3_Data m_Table3Data;
+        private Table4_Data m_Table4Data;
+        private Table5_Data m_Table5Data;
+        private Table6_Data m_Table6Data;
+        private Table7_Data m_Table7Data;
+        private Table8_Data m_Table8Data;
+        private Table9_Data m_Table9Data;
+        private Table10_Data m_Table10Data;
+        private Table11_Data m_Table11Data;
+        private Table12_Data m_Table12Data;
+        private Table13_Data m_Table13Data;
+        private Table14_Data m_Table14Data;
+        private Table15_Data m_Table15Data;
+
+        private Table1_Data Table1Data => m_Table1Data ?? (m_Table1Data = new Table1_Data(m_BaseData));
+        private Table2_Data Table2Data => m_Table2Data ?? (m_Table2Data = new Table2_Data(Table1Data));
+        private Table3_Data Table3Data => m_Table3Data ?? (m_Table3Data = new Table3_Data(m_BaseData));
+        private Table4_Data Table4Data => m_Table4Data ?? (m_Table4Data = new Table4_Data(m_BaseData, Table3Data));
+        private Table5_Data Table5Data => m_Table5Data ?? (m_Table5Data = new Table5_Data(m_BaseData, Table4Data));
+        private Table6_Data Table6Data => m_Table6Data ?? (m_Table6Data = new Table6_Data(m_BaseData, Table5Data));
+        private Table7_Data Table7Data => m_Table7Data ?? (m_Table7Data = new Table7_Data(m_BaseData, Table4Data));
+        private Table8_Data Table8Data => m_Table8Data ?? (m_Table8Data = new Table8_Data(m_BaseData, Table7Data));
+        private Table9_Data Table9Data => m_Table9Data ?? (m_Table9Data = new Table9_Data(m_BaseData, Table8Data));
+        private Table10_Data Table10Data => m_Table10Data ?? (m_Table10Data = new Table10_Data(m_BaseData, Table8Data));
+        private Table11_Data Table11Data => m_Table11Data ?? (m_Table11Data = new Table11_Data(m_BaseData));
+        private Table12_Data Table12Data => m_Table12Data ?? (m_Table12Data = new Table12_Data(m_BaseData, Table4Data, Table5Data, Table7Data, Table9Data, Table10Data, Table11Data));
+        private Table13_Data Table13Data => m_Table13Data ?? (m_Table13Data = new Table13_Data(m_BaseData, Table1Data, Table7Data, Table10Data, Table11Data, Table12Data));
+        private Table14_Data Table14Data => m_Table14Data ?? (m_Table14Data = new Table14_Data(m_BaseData, Table2Data, Table6Data, Table8Data, Table10Data, Table13Data));
+        private Table15_Data Table15Data => m_Table15Data ?? (m_Table15Data = new Table15_Data(m_BaseData, Table3Data, Table4Data, Table5Data, Table6Data, Table9Data, Table12Data, Table13Data, Table14Data));
 
         public Form1()
         {
